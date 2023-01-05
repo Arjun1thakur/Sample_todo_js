@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400;1,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lora', serif;
+}
+body{
+    background: #000000;
+    color: white;
+}
+button{
+    border: none;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+#header{
+    margin: 30px 0px;
+    display: flex;
+}
+#add-button{
+    position: absolute;
+    left: 80%;
+    cursor: pointer;
+    color: white;
+}
+#add-button i{
+    color: orange;
+}
+.color-red{
+    color: red;
+}
+#modal-div{
+    display: none;
+    position: fixed;
+    padding: 20% 0 0 30%;
+    top: -10%;
+    z-index: 1;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+}
+#modal-box{
+    border-radius: 7px;
+    width: 30vw;
+    height: 30vh;
+    padding: 30px 0 0px 0px;
+    text-align: center;
+    color: black;
+    background-color: #fff;
+    animation: modalPop 0.2s ease-in 0s 1;
+}
+.big-blue-text{
+    color: #eb0f0f;
+    font-size: 25px;
+}
+.blue-button{
+    all: unset;
+    padding: 15px 40px;
+    border-radius: 50px;
+    background-color: orangered;
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+}
+.blue-button:hover{
+    background-color: white;
+    color: black;
+    box-shadow: 1px 1px 5px orangered;
+}
+/* #modal-close-button{
+    margin-left: 10%;
+} */
+.modal-content{
+    margin-top: 3%;
+}
+.input-box{
+    all: unset;
+    border-radius: 20px;
+    width: 90%;
+    color: black;
+    margin: 10px;
+    height: 40px;
+    box-shadow: 1px 1px 5px orangered;
+}
+.input-box:focus{
+    box-shadow: 2px 2px 10px orange;
+}
+#outer-container{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-right: 10%;
+    width: 90%;
+}
+.card{
+    list-style: none;
+    display: none;
+    position: relative;
+    min-height: 350px;
+    min-width: 30%;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px 0 0 0;
+    background: #EEEEEE;
+    animation: cardAnimate 0.2s ease-in 0s 1;
+}
+.card-head{
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #572e3b;
+    cursor: pointer;
+}
+.list-element{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+.buttons-in-card{
+    display: flex;
+    font-size: 30px;
+}
+.add-button-in-card{
+    position: absolute;
+    bottom: 10px;
+    font-size: 25px;
+    margin-left: 15%;
+    right: 10px;
+    cursor: pointer;
+    color: #1e59b8;
+    background-color: #EEEEEE;
+}
+.delete-button-in-card{
+    position: absolute;
+    right: 50px;
+    bottom: 10px;
+    font-size: 25px;
+    cursor: pointer;
+    color: #fa0b0b;
+    background-color: #EEEEEE;
+}
+.in-list-button{
+    cursor: pointer;
+}
+#modal-div-card{
+    display: none;
+    position: fixed;
+    padding: 20% 0 0 30%;
+    text-align: center;
+    top: -10%;
+    z-index: 1;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+}
+#modal-box-card{
+    width: 450px;
+    height: 250px;
+    background-color: white;
+    box-shadow: 2px 2px 10px gainsboro;
+    padding-top: 60px;
+    color: orangered;
+    text-align: center;
+    border-radius: 15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 888;
+    animation: modalPop 0.2s ease-in 0s 1;
+}
+.this-list-element{
+    font-size: 20px;
+    font-weight: 700;
+    color: #393E46;
+    animation: cardTextAnimate 0.2s ease-in 0s 1;
+}
+#check-done{
+    color: black;
+    background-color: grey;
+    display: none;
+}
+.mark-as-done-class{
+    background-color: #4883e2;
+    color: #EEEEEE;
+    font-size: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 3px 4px 4px 4px;
+}
+#back-button{
+    margin-left: 10%;
+   font-size: 40px;
+   display: none;
+}
+#back-icon{
+    z-index: 20;
+    font-size: 40px;   
+    color: red;
+    cursor: pointer;
+}
+#card-dynamic-head{
+    justify-content: center;
+    font-size: 55px;
+    font-weight: 700;
+    color: red;
+    display: none;
+}
+
+#empty-list{
+    position: relative;
+}
