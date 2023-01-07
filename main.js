@@ -1,125 +1,129 @@
-var arr_of_obj = new Set();
-var value_id;
-var title_flag = false;
-var subtask = new Map;
-function modal(){
-    document.getElementById("modal-div").style.display = "block";
-};
-function addCard(){
-    var card_title = document.getElementById("modal-input-box").value;
-    createObj(card_title);
-    closeModal();
-}
-function closeModal(){
-    document.getElementById("modal-div").style.display = "none";
-}
-function createObj(title){
-    document.getElementById('empty-list').style.display = 'none'
-    var card_obj = {
-        title: title,
-        id: Date.now(),
-        subtask
-    };
-    arr_of_obj.add(card_obj);
-    createCard(card_obj.id);
-    console.log(arr_of_obj)
-};
-function addList(){
-    var cloned_list_item = document.querySelector(".this-list-element").cloneNode(true);
-    var card_item = document.getElementById('modal-input-box-card').value;
-    console.log(value_id);
-    cloned_list_item.innerText =  card_item; 
-    cloned_list_item.style.display = "block";
-    cloned_list_item.setAttribute('id',`${Date.now()}`);
-    cloned_list_item.setAttribute('value',`${Date.now()}`);
-    cloned_list_item.setAttribute('style',"margin-left: 10px;");
+let data=[];
+let title_btn = document.querySelector('#add_title');
+let title = document.querySelector('#add_task_title');
+let add_taskInCard=document.querySelector('#add_taskInCard');
+let container=document.querySelector('.container')
+let sep_val=document.querySelector(".specific");
+let i=0;
+let val0;
+title_btn.addEventListener('click',()=>{
+    let name = title.value
+    let ids=Date.now()
+    const tempObj={
+        id:ids,
+        title:name,
+        content:new Set()
+    }
+    data.push(tempObj);
+    addTask();
+})
+function main_list(){
+    for(obj of data){
+        if(obj.id==val0){
+            obj.content.add(add_taskInCard.value)
+        }
+    }
+    var cloned_list = document.querySelector(".tr").cloneNode(true);
+    cloned_list.innerHTML =  `<h3>${add_taskInCard.value}</h3>`; 
+    cloned_list.setAttribute('id',`${Date.now()}`);
+    cloned_list.setAttribute('value',`${Date.now()}`);
     var done_button = document.createElement('button');
-    done_button.setAttribute('id',`check-done-${Date.now()}`);
-    done_button.setAttribute('class','mark-as-done-class');
+    done_button.setAttribute('id',`btn_dn${Date.now()}`);
+    done_button.setAttribute('class','done_Task');
     done_button.setAttribute('value',`${Date.now()}`);
-    done_button.setAttribute('onclick','completedTask(this.value)');
-    done_button.innerText = ' Mark Done';
-    done_button.setAttribute('style','font-size:15 px;cursor:pointer; height:18px; border-radius:10px;')
-    cloned_list_item.appendChild(done_button);
-    cloned_list_item.setAttribute('onClick',"completedTask(this.value)");
-     for(obj of arr_of_obj){
-        for(prop in obj){
-            if(obj.id == value_id){
-                obj.subtask.set(`${card_item}`,`${Date.now()}`);
-                break;
-            }
-        }
-    }
-    document.getElementById(`${value_id}`).getElementsByClassName('add-list-after-this')[0].appendChild(cloned_list_item).appendChild(done_button);
-    closeCardModal();
-    console.log(arr_of_obj)
-}
-function closeCardModal(){
-    document.getElementById('modal-div-card').style.display = "none";
-}
-function addSubtask(val) {
-    document.getElementById("modal-div-card").style.display = "block";
-    value_id = val;
-};
-function deleteCard(val){
-    console.log(val)
-    var delete_div = document.getElementById(`${val}`);
-    for(obj of arr_of_obj){
-        for(prop in obj){
-        if (obj.id==val)
-        arr_of_obj.delete(obj);
-        break;
-        }
-    }
-    delete_div.parentNode.removeChild(delete_div);
-    if(arr_of_obj.size==0){
-        document.getElementById('empty-list').style.display = 'block';
-    }
+    done_button.setAttribute('onclick','taskdone(this.value)');
+    done_button.innerText = 'Done';
+    cloned_list.appendChild(done_button);
+    cloned_list.setAttribute('onClick',"taskdone(this.value)");
     
+    document.getElementById(`${val0}`).getElementsByClassName('content')[0].appendChild(cloned_list).appendChild(done_button);
+    close_popup_card()
+}
+function addTask(){
+    var first_card = document.querySelector('.card').cloneNode(true);
+    display_card(first_card);
+}
+function display_card(card){
+    data.forEach(ele => {
+        card.id = ele.id;
+        card.querySelector("#title").innerHTML = ele.title;
+        card.querySelector("#title").setAttribute('value',`${ele.id}`);
+        card.setAttribute("value",`${ele.id}`);
+        card.querySelector(".delete").setAttribute("value",`${ele.id}`);
+        card.querySelector(".delete").setAttribute("onclick","deleteCard(this.value)");
+        card.querySelector(".edit").setAttribute("value",`${ele.id}`);
+        card.querySelector(".edit").setAttribute("onclick","addSubtask(this.value)");
+    });
+
+    card.style.display = "block";
+    document.querySelector(".cards").appendChild(card);
+    close_popup()
+}
+
+function check(){
+    if(data.length==0){
+        document.querySelector('.content_box').innerHTML = 'No Items in the todo list'
+    }else{
+        document.querySelector('.content_box').style.display = 'none'
+    }
+}
+setInterval(()=>{
+    check();
+},0)
+
+
+function addTask_popup(){
+    let pop_window=document.querySelector('.blur1');
+    pop_window.style.display='block'
 };
 
-function createCard(){
-    var first_card = document.querySelector('.card').cloneNode(true);
-    display(first_card);
+function close_popup(){
+    let pop_window=document.querySelector('.blur1');
+    pop_window.style.display='none'
 };
-function completedTask(value){
-    document.getElementById(`${value}`).style.textDecoration = 'line-through';
-    document.getElementById(`${value}`).style.color = '#112D4E';
-    document.getElementById(`check-done-${value}`).remove();
-    console.log(value);
+
+function close_popup_card(){
+    let pop_window=document.querySelector('.blur2');
+    pop_window.style.display='none'
+};
+
+function deleteCard(main){
+    var delete_div = document.getElementById(`${main}`);
+    for(obj of data){
+        if(obj.id==main){
+            data.splice(data.findIndex(obj => obj.id == main) , 1)
+        }
+    }
+delete_div.parentNode.removeChild(delete_div);
 }
-function display(card){
-    document.getElementById('empty-list').style.display = 'none'
-    arr_of_obj.forEach(element => {
-        card.id = element.id;
-        card.querySelector(".card-head").innerHTML = element.title;
-        card.querySelector(".card-head").setAttribute('value',`${element.id}`);
-        card.setAttribute("value",`${element.id}`);
-        card.setAttribute("display","block");
-        card.setAttribute("min-height","300px");
-        card.querySelector(".delete-button-in-card").setAttribute("value",`${element.id}`);
-        card.querySelector(".delete-button-in-card").setAttribute("onClick","deleteCard(this.value)");
-        card.querySelector(".add-button-in-card").setAttribute("value",`${element.id}`);
-        card.querySelector(".add-button-in-card").setAttribute("onClick","addSubtask(this.value)");    
-    });
-    if(title_flag)
-    card.style.display = 'none';
-    else
-    card.style.display = "block";
-    document.getElementById("outer-container").appendChild(card);
+
+function addSubtask(val){
+    let pop_window=document.querySelector('.blur2');
+    pop_window.style.display='block'
+    val0=val
+};
+
+function taskdone(value){
+    let stc=document.getElementById(`${value}`)
+    stc.classList.add('stc')
+    document.getElementById(`btn_dn${value}`).style.display="none";
 }
-function headerFunc(val){
-    var card_header;
-    for(let ele of arr_of_obj){
+function only_card(){
+    document.querySelector('.card').style.display= "block";
+}
+
+function only_card(val){
+    var cardHeader;
+    for(let ele of data){
         for(let id in ele){
             if(ele[id]==val){
-                card_header = ele.title;
+                cardHeader = ele.title;
                 break;
             };
         };
     };
-    document.querySelector("#app-name").style.display = 'none';
-    for(let ele of arr_of_obj){
+    document.querySelector("#back_title_ico").innerHTML = `<h1 style="cursor: pointer;" onclick="hidden0()"><span><i class="fa-solid fa-circle-chevron-left"></i></span> Back</h1>`;
+    for(let ele of data){
             if(ele.id==val){
                 document.getElementById(`${ele.id}`).style.display = 'block';
             }
@@ -127,19 +131,12 @@ function headerFunc(val){
                 document.getElementById(`${ele.id}`).style.display = 'none';
             }
     };
-    document.getElementById('card-dynamic-head').innerText = `${card_header}`;
-    document.getElementById('card-dynamic-head').style.display = 'flex'
-    document.getElementById('back-button').style.display = 'block'
-    title_flag = true;
+    document.getElementById('title').innerText = `${cardHeader}`;
 };
-function displayAll(){
-    title_flag = false;
-    document.querySelector("#app-name").style.display = 'block';
-    document.getElementById('back-button').style.display = 'none';
-    for(let ele of arr_of_obj){
+function hidden0(){
+    document.querySelector("#back_title_ico").innerHTML = '<h1 id="back_title_ico"><span>Tasks</span> List</h1>';
+    for(let ele of data){
             document.getElementById(`${ele.id}`).style.display = 'block';
     };
-    document.getElementById('card-dynamic-head').innerText = ``;
-    document.getElementById('card-dynamic-head').style.display = 'none';
+    console.log(data)
 }
-

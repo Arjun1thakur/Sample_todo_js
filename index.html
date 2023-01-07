@@ -4,66 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App JS</title>
-    <link rel="icon" href="1560.png">
+    <title>Todo</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/393bd706fe.js" crossorigin="anonymous"></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <!-- Main Container -->
     <div class="container">
-    <div id="header">
-        <div id="app-name"><h1>
-            <span style="font-weight: 800; color:orange;">Tasks</span> List</h1>
+        <!-- Heading & Icon  -->
+        <nav class="flex">
+            <h1 id="back_title_ico"><span>Tasks</span> List</h1>
+            <div id="add_task" onclick="addTask_popup()"><h4><i class="fa-solid fa-circle-plus"></i> Add Item</h4></div>
+        </nav>
+        <!-- Message -->
+        <div class="content_box">
         </div>
-        <div id="add-button" onclick="modal()"><h1>
-            <i class="fas fa-plus-circle color-blue"></i> Add Item</h1></div>            
-        </div>
-    <div id="back-button">
-        <i id="back-icon" class="fas fa-arrow-circle-left" onclick="displayAll()"></i>
-        <h2>Go back</h2>
-    </div>
-    <div id="card-dynamic-head">abc</div>
-    <div id="modal-div">
-        <div id="modal-box">
-            <span class="big-blue-text modal-content">Add New List</span>
-            <input id="modal-input-box" class="input-box modal-content" type="text" placeholder="Type List title here"> <br></input>
-            <button id= "modal-add-button" class="blue-button modal-content" onclick="addCard()">Add</button>
-            <button id="modal-close-button" class="blue-button modal-content" onclick="closeModal()">Close</button>
-        </div>
-    </div>
-    <div id="modal-div-card">
-        <div id="modal-box-card">
-            <span class="big-blue-text modal-content">Add New Item</span>
-            <input id="modal-input-box-card" class="input-box modal-content" type="text" placeholder="Type List List here"> <br></input>
-            <button id= "modal-add-button" class="blue-button modal-content" onclick="addList()">Add</button>
-            <button id="modal-close-button" class="blue-button modal-content" onclick="closeCardModal()">Close</button>
-        </div>
-    </div>
-     <div style="display: none;" class="this-list-element">
-        <button class="in-list-button" value="" onclick="completedTask(this)">mark as done</button>
-     </div>
-     <div id="empty-list">
-         No Items in the Todo list
-        
-     </div>
-     
-    <div id="outer-container">
-        <div class="card">
-            <div class="wrap-cont">
-            <option class="card-head" onclick="headerFunc(this.value)">Try</option>
-            <br><hr><div class="add-list-after-this"></div>
-            <br>
-            <div class="buttons-in-card">
-                <button class="fas fa-trash delete-button-in-card"></button>    
-                <button class="fas fa-plus-circle add-button-in-card"></button>
+            <div class="cards">
+                <div class="card" id="${value.id}">
+                    <button id='title' onclick="only_card(this.value)">${value.title}</button>
+                    <div class="content">
+                        <div class="tr">
+                            
+                        </div>
+                    </div>
+                    <div class="option">
+                        <button class="delete" ><i class="fa-solid fa-trash"></i></button>
+                        <button class="edit" ><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
+                </div>
             </div>
-            </div>
+    </div>
+    <!-- Add Cards pop-up -->
+    <div class="blur1">
+        <div class="pop_up_task">
+            <h2>Add New Task</h2>
+            <input id="add_task_title" type="text" placeholder="Add New Task">
+            <button id="add_title">Add</button>
+            <button onclick="close_popup()">Close</button>
         </div>
     </div>
-</div>
+    <!-- Add Item pop-up -->
+    <div class="blur2">
+        <div class="pop_up_task_card">
+            <h2>Add New Item in Task</h2>
+            <input id="add_taskInCard" type="text">
+            <button id="add_titleInCard" onclick="main_list()">Add</button>
+            <button onclick="close_popup_card()">Close</button>
+        </div>
+    </div>
     <script src="main.js"></script>
-
 </body>
 </html>
-
